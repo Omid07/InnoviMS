@@ -15,6 +15,8 @@ class CreateBillsTable extends Migration
     {
         Schema::create('bills', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('bill_against_id');
+            $table->foreign('bill_against_id')->reference('id')->on('clinets')->onDelete('cascade');
             $table->string('work_type');
             $table->integer('amount_of_order');
             $table->double('per_head_expense');

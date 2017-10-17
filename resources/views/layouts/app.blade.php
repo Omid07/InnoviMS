@@ -39,6 +39,21 @@
                         {{ config('app.name', 'Laravel') }}
                     </a>
                 </div>
+                <div>
+                    <ul class="nav nav-tabs">
+                    <li class="active"><a href="#">Home</a></li>
+                    <li><a href="#">Menu 1</a></li>
+                    <li><a href="#">Menu 2</a></li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Menu 3 <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Submenu 3-1</a></li>
+                            <li><a href="#">Submenu 3-2</a></li>
+                            <li><a href="#">Submenu 3-3</a></li>                        
+                        </ul>
+                    </li>
+                    </ul>
+                </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->

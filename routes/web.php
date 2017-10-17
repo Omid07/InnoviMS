@@ -13,8 +13,6 @@
 
 Route::get('/', function () {
     return view('welcome');
-    // return "welcome to innovi management system";
-    // return view('home');
 });
 
 Auth::routes();
