@@ -10,6 +10,7 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
@@ -41,15 +42,20 @@
                 </div>
                 <div>
                     <ul class="nav nav-tabs">
-                    <li class="active"><a href="#">Home</a></li>
+                    <li class="active"><a href="/home">Home</a></li>
                     <li><a href="#">Menu 1</a></li>
-                    <li><a href="#">Menu 2</a></li>
                     <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Menu 3 <span class="caret"></span></a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Client <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Submenu 3-1</a></li>
-                            <li><a href="#">Submenu 3-2</a></li>
-                            <li><a href="#">Submenu 3-3</a></li>                        
+                            <li><a href="/clients">List</a></li>
+                            <li><a href="/client/create">Create</a></li>                     
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Bill <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="bills">List</a></li>
+                            <li><a href="bill/create">Create</a></li>                       
                         </ul>
                     </li>
                     </ul>
