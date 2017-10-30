@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use Session;
 
 class ClientController extends Controller
 {
@@ -47,6 +48,7 @@ class ClientController extends Controller
             ]);
         $input = $request->all();
         DB::insert('insert into clients (name, info, type) values (?, ?, ?)', [$input['name'], $input['info'], $input['type']]);
+        Session::flash('message', 'Successfully created!');
         return redirect()->action('ClientController@index');
     }
 
@@ -58,7 +60,8 @@ class ClientController extends Controller
      */
     public function show($id)
     {
-        //
+        $client = DB::table('clients')->find($id);
+        return view('clients.show', compact('client'));
     }
 
     /**
@@ -69,7 +72,8 @@ class ClientController extends Controller
      */
     public function edit($id)
     {
-        echo $id;
+        $client = DB::table('clients')->find($id);
+        return view('clients.edit', compact('client'));
     }
 
     /**
@@ -81,7 +85,11 @@ class ClientController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        echo $request->name;
+        $client = DB::table('clients')->find($id);
+        DB::table('clients')->where('id', $id)->update(['name' => $request->name, 'info' => $request->info]);
+        Session::flash('alert-class', 'alert-danger'); 
+        return redirect()->action('ClientController@index');
     }
 
     /**
@@ -92,6 +100,8 @@ class ClientController extends Controller
      */
     public function destroy($id)
     {
-        echo $id;
+        DB::table('clients')->where('id', $id)->delete();
+        Session::flash('alert-class', 'alert-danger'); 
+        return redirect()->action('ClientController@index');
     }
 }

@@ -14,6 +14,9 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="{{ asset('js/myjquery.js')}}"></script>
+    {!! Html::style('css/stylesheet.css') !!}
     <!-- Scripts -->
     <script>
         window.Laravel = {!! json_encode([
