@@ -85,7 +85,6 @@ class ClientController extends Controller
      */
     public function update(Request $request, $id)
     {
-        echo $request->name;
         $client = DB::table('clients')->find($id);
         DB::table('clients')->where('id', $id)->update(['name' => $request->name, 'info' => $request->info]);
         Session::flash('alert-class', 'alert-danger'); 
