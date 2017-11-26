@@ -4,7 +4,7 @@
     <div class="panel panel-default">
         <div class="panel-heading">
             <div class="clearfix">
-                <span class="panel-title">Invoices</span>
+                <span class="panel-title">Invoice</span>
                 <a href="{{route('invoices.create')}}" class="btn btn-success pull-right">Create</a>
             </div>
         </div>

@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<div class = "container">
     <div id="invoice">
         <div class="panel panel-default" v-cloak>
             <div class="panel-heading">
@@ -10,14 +11,15 @@
                 </div>
             </div>
             <div class="panel-body">
-                <!-- @include('invoices.form') -->
+                @include('invoices.form')
             </div>
             <div class="panel-footer">
                 <a href="{{route('invoices.index')}}" class="btn btn-default">CANCEL</a>
-<!--                 <button class="btn btn-success" @click="create" :disabled="isProcessing">CREATE</button> -->
+                <button class="btn btn-success" @click="create" :disabled="isProcessing">CREATE</button>
             </div>
         </div>
     </div>
+</div>
 @endsection
 
 @push('scripts')
