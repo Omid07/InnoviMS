@@ -8,15 +8,21 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Innovims') }}</title>
 
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <!-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="{{ asset('js/myjquery.js')}}"></script>
-    {!! Html::style('css/stylesheet.css') !!}
+    
+    <!-- {!! Html::style('css/stylesheet.css') !!} -->
+
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/override.css">
+    <link rel="stylesheet" type="text/css" href="/css/app.css">
+
     <!-- Scripts -->
     <script>
         window.Laravel = {!! json_encode([
@@ -108,4 +114,5 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
 </body>
+    @stack('scripts')
 </html>

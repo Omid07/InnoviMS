@@ -27,5 +27,4 @@ Route::put('/client/{id}', 'ClientController@update');
 Route::delete('/client/{id}/delete', 'ClientController@destroy');
 Route::get('clients/{id}', 'ClientController@show');
 
-Route::get('/bills', 'BillController@index');
-Route::get('/bill/create', 'BillController@create');
+Route::resource('invoices', 'InvoiceController');
