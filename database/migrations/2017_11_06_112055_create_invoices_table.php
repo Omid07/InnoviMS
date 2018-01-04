@@ -21,10 +21,12 @@ class CreateInvoicesTable extends Migration
             $table->string('title');
             $table->string('client');
             $table->string('client_address');
-            $table->decimal('sub_total');
-            $table->decimal('advance');
-            $table->decimal('discount');
-            $table->decimal('grand_total');
+            $table->decimal('sub_total', 13, 2);
+            $table->decimal('advance', 13, 2);
+            $table->decimal('discount', 13, 2);
+            $table->string('bill_status');
+            $table->string('work_status');
+            $table->decimal('grand_total', 13, 2);
             $table->timestamps();
         });
     }

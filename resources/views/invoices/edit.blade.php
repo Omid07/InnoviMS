@@ -1,11 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
+<div class = "container">
     <div id="invoice">
         <div class="panel panel-default" v-cloak>
             <div class="panel-heading">
                 <div class="clearfix">
-                    <span class="panel-title">Create Invoice</span>
+                    <span class="panel-title">Edit Invoice</span>
                     <a href="{{route('invoices.index')}}" class="btn btn-default pull-right">Back</a>
                 </div>
             </div>
@@ -18,6 +19,7 @@
             </div>
         </div>
     </div>
+</div>
 @endsection
 
 @push('scripts')

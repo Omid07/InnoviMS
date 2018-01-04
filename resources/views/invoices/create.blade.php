@@ -28,18 +28,20 @@
     <script type="text/javascript">
         Vue.http.headers.common['X-CSRF-TOKEN'] = '{{csrf_token()}}';
         window._form = {
-            invoice_no: '',
+            invoice_no: '{{$invoice_number}}',
             client: '',
             client_address: '',
-            title: '',
+            title: 'Design/Print',
+            work_status:'Initial',
+            bill_status:'Unpaid',
             invoice_date: '',
             due_date: '',
             advance: 0,
             discount: 0,
             products: [{
-                name: 'eeeeee',
+                name: '',
                 price: 0,
-                qty: 1
+                qty: 0
             }]
         };
     </script>

@@ -4,15 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use App\Client;
 use Session;
 
 class ClientController extends Controller
 {
-
-    // public function_construct()
-    // {
-    //     $this->middleware('auth');
-    // }
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -20,8 +20,8 @@ class ClientController extends Controller
      */
     public function index()
     {
-        // $clients = DB::select('select * from clients');
-        $clients = DB::table('clients')->where('type', '=', 'Client')->get();
+        $clients = Client::orderBy('created_at', 'desc')
+            ->paginate(20);
         return view('clients.index', compact('clients'));
     }
 
@@ -43,12 +43,7 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            ]);
-        $input = $request->all();
-        DB::insert('insert into clients (name, info, type) values (?, ?, ?)', [$input['name'], $input['info'], $input['type']]);
-        Session::flash('message', 'Successfully created!');
+        $client = Client::create($request->all());
         return redirect()->action('ClientController@index');
     }
 
@@ -60,7 +55,7 @@ class ClientController extends Controller
      */
     public function show($id)
     {
-        $client = DB::table('clients')->find($id);
+        $client = Client::find($id);
         return view('clients.show', compact('client'));
     }
 
@@ -85,7 +80,6 @@ class ClientController extends Controller
      */
     public function update(Request $request, $id)
     {
-        echo $request->name;
         $client = DB::table('clients')->find($id);
         DB::table('clients')->where('id', $id)->update(['name' => $request->name, 'info' => $request->info]);
         Session::flash('alert-class', 'alert-danger'); 
@@ -100,8 +94,8 @@ class ClientController extends Controller
      */
     public function destroy($id)
     {
-        DB::table('clients')->where('id', $id)->delete();
-        Session::flash('alert-class', 'alert-danger'); 
+        $client = Client::find($id);
+        $client->delete();
         return redirect()->action('ClientController@index');
     }
 }

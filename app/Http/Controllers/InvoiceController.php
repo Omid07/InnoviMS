@@ -8,6 +8,10 @@ use App\InvoiceProduct;
 
 class InvoiceController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         $invoices = Invoice::orderBy('created_at', 'desc')
@@ -16,7 +20,10 @@ class InvoiceController extends Controller
     }
     public function create()
     {
-        return view('invoices.create');
+        $number = Invoice::max('id');
+        $number = sprintf('%03d', ($number+1));
+        $invoice_number = "CB".date('y').date('m').$number;
+        return view('invoices.create', compact('invoice_number'));
     }
     public function store(Request $request)
     {
@@ -45,8 +52,7 @@ class InvoiceController extends Controller
         }
         $data = $request->except('products');
         $data['sub_total'] = $products->sum('total');
-        $data['grand_total'] = $data['sub_total'] - $data['discount'];
-        // $data['grand_total'] = $data['sub_total'] - $data['discount'] - $data['advance'];
+        $data['grand_total'] = $data['sub_total'] - $data['discount'] - $data['advance'];
         $invoice = Invoice::create($data);
         $invoice->products()->saveMany($products);
         return response()
@@ -93,7 +99,6 @@ class InvoiceController extends Controller
         }
         $data = $request->except('products');
         $data['sub_total'] = $products->sum('total');
-        // $data['grand_total'] = $data['sub_total'] - $data['discount'];
         $data['grand_total'] = $data['sub_total'] - $data['discount'] - $data['advance'];
         $invoice->update($data);
         InvoiceProduct::where('invoice_id', $invoice->id)->delete();

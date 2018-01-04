@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\VInvoice;
 
 class InvoiceProduct extends Model
 {
@@ -13,4 +14,8 @@ class InvoiceProduct extends Model
     {
     	return $this->belongsTo(invoice::class);
     }
+    // public function vinvoice()
+    // {
+    // 	return $this->belongsTo(VInvoice::class);
+    // }
 }

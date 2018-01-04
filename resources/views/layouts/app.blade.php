@@ -12,18 +12,20 @@
 
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <!-- Styles -->
-<!--     <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="{{ asset('js/myjquery.js')}}"></script>
+    
     {!! Html::style('css/stylesheet.css') !!}
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/css/override.css">
     <link rel="stylesheet" type="text/css" href="/css/app.css">
 
-        <script src="/js/vue.min.js"></script>
-    <script src="/js/vue-resource.min.js"></script>
-    <script type="text/javascript">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!-- Scripts -->
     <script>
         window.Laravel = {!! json_encode([
@@ -46,26 +48,25 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
-                    </a>
+                    <a class="navbar-brand" href="{{ url('/') }}">Innovi</a>
                 </div>
                 <div>
                     <ul class="nav nav-tabs">
-                    <li class="active"><a href="/home">Home</a></li>
-                    <li><a href="#">Menu 1</a></li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Client <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="/clients">List</a></li>
-                            <li><a href="/client/create">Create</a></li>                     
-                        </ul>
-                    </li>
+                    <li class=""><a href="/home">Home</a></li>
+                    <li class=""><a href="/clients">Client</a></li>
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Bill <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="bills">List</a></li>
-                            <li><a href="bill/create">Create</a></li>                       
+                            <li><a href="/invoices">Clinet Bill</a></li>
+                            <li><a href="/vinvoices">Vendor Bill</a></li>                       
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Others <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/salaries">Salary</a></li>
+                            <li><a href="/records">Daily Record</a></li>
+                            <li><a href="/billpayments">Bill Payment</a></li>                       
                         </ul>
                     </li>
                     </ul>
@@ -113,6 +114,7 @@
     </div>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+    <!-- <script src="{{ asset('js/app.js') }}"></script> -->
 </body>
+@stack('scripts')
 </html>

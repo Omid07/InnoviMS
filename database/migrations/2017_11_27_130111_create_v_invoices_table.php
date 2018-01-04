@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateVendorBillsTable extends Migration
+class CreateVInvoicesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,20 @@ class CreateVendorBillsTable extends Migration
      */
     public function up()
     {
-        Schema::create('vendor_bills', function (Blueprint $table) {
+        Schema::create('v_invoices', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('invoice_id');
-            $table->foreign('invoice_id')->references('id')->on('invoices')->onDelete('cascade');
+            $table->string('invoice_no')->unique();
             $table->date('invoice_date');
             $table->date('due_date');
             $table->string('title');
             $table->string('client');
             $table->string('client_address');
-            $table->decimal('sub_total');
-            $table->decimal('discount');
-            $table->decimal('grand_total');
+            $table->decimal('sub_total', 13, 2);
+            $table->decimal('advance', 13, 2);
+            $table->decimal('discount', 13, 2);
+            $table->string('bill_status');
+            $table->string('work_status');
+            $table->decimal('grand_total', 13, 2);
             $table->timestamps();
         });
     }
@@ -36,6 +38,6 @@ class CreateVendorBillsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('vendor_bills');
+        Schema::dropIfExists('v_invoices');
     }
 }

@@ -10,14 +10,14 @@ class Invoice extends Model
         'invoice_no', 'invoice_date', 'due_date',
         'title', 'sub_total', 'discount', 'advance',
         'grand_total', 'client',
-        'client_address'
+        'client_address', 'bill_status', 'work_status'
     ];
     public function products()
 	{
 		return $this->hasMany(InvoiceProduct::class);
 	}
-    public function vendorBills()
-    {
-        return $this->hasMany(VendorBills::class);
-    }
+    // public function items()
+    // {
+    //     return $this->hasMany(VendorBills::class);
+    // }
 }

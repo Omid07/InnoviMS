@@ -20,10 +20,29 @@
     </div>
     <div class="col-sm-4">
         <div class="form-group">
-            <label>Work Title</label>
-            <input type="text" class="form-control" v-model="form.title">
-            <p v-if="errors.title" class="error">@{{errors.title[0]}}</p>
+             <select v-model="form.title">
+                <option disabled value="">Work Title</option>
+                <option>Design/Print</option>
+                <option>IT</option>
+                <option>Degital Marketing</option>
+            </select>
         </div>
+        <div class="form-group">
+             <select v-model="form.work_status">
+                <option disabled value="">Work Status</option>
+                <option>Initial</option>
+                <option>On going</option>
+                <option>Finished</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <select v-model="form.bill_status">
+                <option disabled value="">Bill Status</option>
+                <option>Unpaid</option>
+                <option>Paid</option>
+            </select>
+        </div>
+        <hr>
         <div class="row">
             <div class="col-sm-6">
                 <label>Invoice Date</label>
