@@ -1,34 +1,36 @@
 @extends('layouts.app')
 @section('content')
-	<center><h2>Clients of Innovi</h2></center>
+	<center><h2>Salaries information of Innovi</h2></center>
 	<center><p>bla bla bla asdasd asdasdas asdasda asdsad</p></center>
 	<br/>
 	<div class="container">
-		<a href="{{route('clients.create')}}" class="btn btn-success pull-right">Create</a>
-		@if($clients->count())
+		<a href="{{route('salaries.create')}}" class="btn btn-success pull-right">Create</a>
+		@if($salaries->count())
 			<table class="table table-striped">
 				<thead>
 					<tr>
+						<th>Invoice #</th>
 						<th>Name</th>
-						<th>Type</th>
+						<th>Amount</th>
 						<th>Information</th>
 						<th>Created At</th>
                         <th>Updated At</th>
 					</tr>
 				</thead>
 				<tbody>
-					@foreach ($clients as $client)
+					@foreach ($salaries as $salary)
 					<tr>
-						<td>{{ $client->name }}</td>
-						<td>{{ $client->type }}</td>
-						<td>{{ str_limit($client->info, 6, '....') }}</td>
-						<td>{{ $client->created_at->diffForHumans() }}</td>
-                        <td>{{ $client->updated_at->diffForHumans() }}</td>
+						<td>{!! $salary->invoice_no !!}</td>
+						<td>{{ $salary->name }}</td>
+						<td>{!! $salary->amount !!}</td>
+						<td>{{ str_limit($salary->info, 6, '....') }}</td>
+						<td>{{$salary->created_at->diffForHumans()}}</td>
+                        <td>{{$salary->updated_at->diffForHumans()}}</td>
                         <td class="text-right">
-                            <a href="{{route('clients.show', $client)}}" class="btn btn-default btn-sm">View</a>
-                            <a href="{{route('clients.edit', $client)}}" class="btn btn-primary btn-sm">Edit</a>
+                            <a href="{{route('salaries.show', $salary)}}" class="btn btn-default btn-sm">View</a>
+                            <a href="{{route('salaries.edit', $salary)}}" class="btn btn-primary btn-sm">Edit</a>
                             <form class="form-inline" method="post"
-                                action="{{route('clients.destroy', $client)}}"
+                                action="{{route('salaries.destroy', $salary)}}"
                                 onsubmit="return confirm('Are you sure?')"
                             >
                                 <input type="hidden" name="_method" value="delete">
@@ -40,12 +42,12 @@
 					 @endforeach
 				</tbody>
 			</table>
-			{!! $clients->render() !!}
+			{!! $salaries->render() !!}
 	    @else
             <div class="invoice-empty">
                 <p class="invoice-empty-title">
                     No Records were created.
-                    <a href="{{route('clients.create')}}">Create Now!</a>
+                    <a href="{{route('salaries.create')}}">Create Now!</a>
                 </p>
             </div>
         @endif

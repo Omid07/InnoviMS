@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\BillPayment;
 
-class BillController extends Controller
+class BillPaymentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +14,9 @@ class BillController extends Controller
      */
     public function index()
     {
-        echo "asche monu bill show";
+        $billpayments = BillPayment::orderBy('created_at', 'desc')
+            ->paginate(20);
+        return view('billpayments.index', compact('billpayments'));
     }
 
     /**
@@ -23,7 +26,7 @@ class BillController extends Controller
      */
     public function create()
     {
-        echo "asche monu bill create";
+        return view('billpayments.create');
     }
 
     /**
@@ -34,7 +37,8 @@ class BillController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $record = BillPayment::create($request->all());
+        return redirect()->action('BillPaymentController@index');
     }
 
     /**
@@ -45,7 +49,8 @@ class BillController extends Controller
      */
     public function show($id)
     {
-        //
+        $billpayment = BillPayment::find($id);
+        return view('billpayments.show', compact('billpayment'));
     }
 
     /**
@@ -56,7 +61,8 @@ class BillController extends Controller
      */
     public function edit($id)
     {
-        //
+        $billpayment = BillPayment::find($id);
+        return view('billpayments.edit', compact('billpayment'));
     }
 
     /**
@@ -68,7 +74,10 @@ class BillController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $billpayment = BillPayment::find($id);
+        $input = $request->all();
+        $billpayment->update($input);
+        return view('billpayments.show', compact('billpayment'));
     }
 
     /**
@@ -79,6 +88,8 @@ class BillController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $billpayment = BillPayment::find($id);
+        $billpayment->delete();
+        return redirect()->action('BillPaymentController@index');
     }
 }

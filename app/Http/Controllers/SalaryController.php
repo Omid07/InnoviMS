@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use DB;
-use App\Client;
-use Session;
+use App\Salary;
 
-class ClientController extends Controller
+class SalaryController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
     public function __construct()
     {
         $this->middleware('auth');
@@ -20,9 +23,9 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $clients = Client::orderBy('created_at', 'desc')
+        $salaries = Salary::orderBy('created_at', 'desc')
             ->paginate(20);
-        return view('clients.index', compact('clients'));
+        return view('salaries.index', compact('salaries'));
     }
 
     /**
@@ -32,7 +35,7 @@ class ClientController extends Controller
      */
     public function create()
     {
-        return view('clients.create');
+        return view('salaries.create');
     }
 
     /**
@@ -43,8 +46,8 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        $client = Client::create($request->all());
-        return redirect()->action('ClientController@index');
+        $Salary = Salary::create($request->all());
+        return redirect()->action('SalaryController@index');
     }
 
     /**
@@ -55,8 +58,8 @@ class ClientController extends Controller
      */
     public function show($id)
     {
-        $client = Client::find($id);
-        return view('clients.show', compact('client'));
+        $salary = Salary::find($id);
+        return view('salaries.show', compact('salary'));
     }
 
     /**
@@ -67,8 +70,8 @@ class ClientController extends Controller
      */
     public function edit($id)
     {
-        $client = DB::table('clients')->find($id);
-        return view('clients.edit', compact('client'));
+        $salary = Salary::find($id);
+        return view('salaries.edit', compact('salary'));
     }
 
     /**
@@ -80,10 +83,10 @@ class ClientController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $client = DB::table('clients')->find($id);
-        DB::table('clients')->where('id', $id)->update(['name' => $request->name, 'info' => $request->info]);
-        Session::flash('alert-class', 'alert-danger'); 
-        return redirect()->action('ClientController@index');
+        $salary = Salary::find($id);
+        $input = $request->all();
+        $salary->update($input);
+        return view('salaries.show', compact('salary'));
     }
 
     /**
@@ -94,8 +97,8 @@ class ClientController extends Controller
      */
     public function destroy($id)
     {
-        $client = Client::find($id);
-        $client->delete();
-        return redirect()->action('ClientController@index');
+        $salary = Salary::find($id);
+        $salary->delete();
+        return redirect()->action('SalaryController@index');
     }
 }

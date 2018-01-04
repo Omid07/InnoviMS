@@ -4,11 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
-use App\Client;
 use Session;
+use App\DailyRecord;
 
-class ClientController extends Controller
+class DailyRecordController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
     public function __construct()
     {
         $this->middleware('auth');
@@ -20,9 +25,9 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $clients = Client::orderBy('created_at', 'desc')
+        $records = DailyRecord::orderBy('created_at', 'desc')
             ->paginate(20);
-        return view('clients.index', compact('clients'));
+        return view('records.index', compact('records'));
     }
 
     /**
@@ -32,7 +37,7 @@ class ClientController extends Controller
      */
     public function create()
     {
-        return view('clients.create');
+        return view('records.create');
     }
 
     /**
@@ -43,8 +48,8 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        $client = Client::create($request->all());
-        return redirect()->action('ClientController@index');
+        $record = DailyRecord::create($request->all());
+        return redirect()->action('DailyRecordController@index');
     }
 
     /**
@@ -55,8 +60,8 @@ class ClientController extends Controller
      */
     public function show($id)
     {
-        $client = Client::find($id);
-        return view('clients.show', compact('client'));
+        $record = DailyRecord::find($id);
+        return view('records.show', compact('record'));
     }
 
     /**
@@ -67,8 +72,9 @@ class ClientController extends Controller
      */
     public function edit($id)
     {
-        $client = DB::table('clients')->find($id);
-        return view('clients.edit', compact('client'));
+        $record = DailyRecord::find($id);
+        return view('records.edit', compact('record'));
+        
     }
 
     /**
@@ -80,10 +86,10 @@ class ClientController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $client = DB::table('clients')->find($id);
-        DB::table('clients')->where('id', $id)->update(['name' => $request->name, 'info' => $request->info]);
-        Session::flash('alert-class', 'alert-danger'); 
-        return redirect()->action('ClientController@index');
+        $record = DailyRecord::find($id);
+        $input = $request->all();
+        $record->update($input);
+        return view('records.show', compact('record'));
     }
 
     /**
@@ -94,8 +100,8 @@ class ClientController extends Controller
      */
     public function destroy($id)
     {
-        $client = Client::find($id);
-        $client->delete();
-        return redirect()->action('ClientController@index');
+        $record = DailyRecord::find($id);
+        $record->delete();
+        return redirect()->action('DailyRecordController@index');
     }
 }
