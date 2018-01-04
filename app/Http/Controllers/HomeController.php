@@ -26,15 +26,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $invoices = Invoice::where('work_status', 'initial')->orderBy('created_at')->paginate(8);
+        $invoices = Invoice::where('work_status', 'initial')->orderBy('created_at');
         $dueinvoice = Invoice::where([
             ['bill_status', 'unpaid'],
             ['work_status', 'finished'],
-            ])->orderBy('created_at')->paginate(8);
+            ])->orderBy('created_at');
         $tobepaid = VInvoice::where([
             ['bill_status', 'unpaid'],
             ['work_status', 'finished'],
-            ])->orderBy('created_at')->paginate(8);
+            ])->orderBy('created_at');
         return view('home', compact('invoices', 'dueinvoice', 'tobepaid'));
     }
 }
